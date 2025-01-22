@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BuilderPattern\" />
-  </ItemGroup>
-
 </Project>

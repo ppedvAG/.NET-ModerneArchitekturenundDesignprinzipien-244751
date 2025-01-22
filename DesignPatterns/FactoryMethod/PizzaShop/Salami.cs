@@ -2,6 +2,11 @@
 {
     public class Salami : Pizza
     {
-        public override string ToString() => "Salami";
+        public Salami() : base("Salami")
+        {
+            Toppings.Add(PizzaToppings.TomatoSauce);
+            Toppings.Add(PizzaToppings.Cheese);
+            Toppings.Add(PizzaToppings.Salami);
+        }
     }
 }
