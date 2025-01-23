@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.BuilderPattern;
+using DesignPatterns.Decorator;
 using DesignPatterns.FactoryMethod;
 using DesignPatterns.FactoryMethod.PizzaShop;
 
@@ -8,26 +9,30 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            DbClient.FactoryUsageExample();
+            // Sonderzeichen darstellen
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
+            //DbClient.FactoryUsageExample();
+
+            Console.WriteLine("\nFactory Pattern:\nStandard-🍕 erzeugen");
             PizzaShopFactorySample();
 
+            Console.WriteLine("\nBuilder Pattern:\tEigene 🍕 zusammenstellen");
             PizzaConfiguratorSample();
+
+            Console.WriteLine("\nDecorator Pattern:\t☕ zusammenstellen");
+            CoffeeVendingMachine.CreateCoffee();
         }
 
         private static void PizzaShopFactorySample()
         {
-            Console.WriteLine("\nFactory Pattern demonstrieren");
-
             var pizzaShop = new PizzaShop();
             var pizza = pizzaShop.CreateByName("Margherita");
             Console.WriteLine(pizza);
         }
 
         private static void PizzaConfiguratorSample()
-        {
-            Console.WriteLine("\nBuilder Pattern demonstrieren");
-            
+        {            
             var builder = new PizzaConfigurator();
             var pizza = builder
                 .AddPepperoni()
