@@ -1,4 +1,5 @@
-﻿using DesignPatterns.BuilderPattern;
+﻿using DesignPatterns.Adapter;
+using DesignPatterns.BuilderPattern;
 using DesignPatterns.Decorator;
 using DesignPatterns.FactoryMethod;
 using DesignPatterns.FactoryMethod.PizzaShop;
@@ -22,6 +23,9 @@ namespace DesignPatterns
 
             Console.WriteLine("\nDecorator Pattern:\t☕ zusammenstellen");
             CoffeeVendingMachine.CreateCoffee();
+
+            Console.WriteLine("\nAdapter Pattern:\t🥘🍕 bestellen");
+            FancyPizzaStore.OrderPizza("NYStylePanPizza");
         }
 
         private static void PizzaShopFactorySample()
