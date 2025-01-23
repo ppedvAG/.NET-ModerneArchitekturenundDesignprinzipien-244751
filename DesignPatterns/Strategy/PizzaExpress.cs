@@ -11,7 +11,7 @@ namespace DesignPatterns.Strategy
     internal class PizzaExpress
     {
         // Statt einer konkreten Implementierung nutzen wir den abstrakten Typ IVehicle
-        public IVehicle Vehicle { get; private set; }
+        public IVehicle DeliveryStrategy { get; private set; }
 
         public void Order(string name, int distanceInMeters)
         {
@@ -22,25 +22,25 @@ namespace DesignPatterns.Strategy
             Deliver(pizza);
         }
 
-        private void SelectDeliveryStrategy(int distanceInMeters)
+        public void SelectDeliveryStrategy(int distanceInMeters)
         {
             if (distanceInMeters < 1000)
             {
-                Vehicle = new Bike();
+                DeliveryStrategy = new Bike();
             }
             else if (distanceInMeters < 5000)
             {
-                Vehicle = new Car("Fiat Punto");
+                DeliveryStrategy = new Car("Fiat Punto");
             }
             else 
             {
-                Vehicle = new Drone();
+                DeliveryStrategy = new Drone();
             }
         }
 
-        private void Deliver(Pizza pizza)
+        public void Deliver(Pizza pizza)
         {
-            Console.WriteLine($"{pizza} mit {Vehicle.Name} an Kunden ausliefern.");
+            Console.WriteLine($"{pizza} mit {DeliveryStrategy.Name} an Kunden ausliefern.");
         }
     }
 }
