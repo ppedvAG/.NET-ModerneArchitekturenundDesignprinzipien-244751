@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns", "DesignPat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabDesignPatterns", "LabDesignPatterns\LabDesignPatterns.csproj", "{6D886253-511E-4817-87FA-D72D905B4471}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RentABrain", "RentABrain", "{A543DF50-DF4A-4182-8C14-0852C5E36526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.Model", "ppedv.RentABrain.Model\ppedv.RentABrain.Model.csproj", "{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{6D886253-511E-4817-87FA-D72D905B4471}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D886253-511E-4817-87FA-D72D905B4471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D886253-511E-4817-87FA-D72D905B4471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 	EndGlobalSection
 EndGlobal

@@ -15,3 +15,8 @@ Kurs Repository zu Kurs .NET - Moderne Architekturen und Designprinzipien der pp
 - Behavioral Patterns: Wie verhalten sich Objekte und Objektstrukturen?
   - Strategy: Pizza mit einem Fahrzeug ausliefern
 
+## Awesome Project: Rent a Brain
+
+Wir verkaufen Rechenzeit an Kunden, die besonders hohe Ansprüche für mathematische Operationen haben, wie z. B. die Berechnung von Swing-By-Manövern.
+
+- Domain-Modell anlegen
