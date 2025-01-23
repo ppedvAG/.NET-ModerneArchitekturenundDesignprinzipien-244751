@@ -3,6 +3,7 @@ using DesignPatterns.BuilderPattern;
 using DesignPatterns.Decorator;
 using DesignPatterns.FactoryMethod;
 using DesignPatterns.FactoryMethod.PizzaShop;
+using DesignPatterns.Strategy;
 
 namespace DesignPatterns
 {
@@ -26,6 +27,10 @@ namespace DesignPatterns
 
             Console.WriteLine("\nAdapter Pattern:\t🥘🍕 bestellen");
             FancyPizzaStore.OrderPizza("NYStylePanPizza");
+
+            Console.WriteLine("\nStrategy Pattern:\t🍕 zustellen mit 🚗, 🚲 oder 🚁");
+            var deliveryService = new PizzaExpress();
+            deliveryService.Order("Margherita", 9000);
         }
 
         private static void PizzaShopFactorySample()

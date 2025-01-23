@@ -17,6 +17,10 @@ namespace DesignPatterns.BuilderPattern
         public PizzaConfigurator AddCheese()
         {
             toppings.Add(PizzaToppings.Cheese);
+
+            // Ausschlaggebende beim Builder Pattern ist,
+            // dass die Instanz von sich selber zurueckgegeben wird.
+            // Das ermoeglicht sog. Chaining.
             return this;
         }
 
