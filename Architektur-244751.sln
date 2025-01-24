@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.Model", "p
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.DataAccess", "ppedv.RentABrain.DataAccess\ppedv.RentABrain.DataAccess.csproj", "{8FD96C12-DF75-4661-9265-61EE526FFC4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.DataAccess.Tests", "ppedv.RentABrain.DataAccess.Tests\ppedv.RentABrain.DataAccess.Tests.csproj", "{6A376034-D2FF-42F8-BFB4-66D26D53858A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{8FD96C12-DF75-4661-9265-61EE526FFC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FD96C12-DF75-4661-9265-61EE526FFC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FD96C12-DF75-4661-9265-61EE526FFC4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A376034-D2FF-42F8-BFB4-66D26D53858A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A376034-D2FF-42F8-BFB4-66D26D53858A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A376034-D2FF-42F8-BFB4-66D26D53858A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A376034-D2FF-42F8-BFB4-66D26D53858A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9178C5F9-93B9-4390-9EB8-53D5EEB3F7E0} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 		{8FD96C12-DF75-4661-9265-61EE526FFC4E} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
+		{6A376034-D2FF-42F8-BFB4-66D26D53858A} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 	EndGlobalSection
 EndGlobal
