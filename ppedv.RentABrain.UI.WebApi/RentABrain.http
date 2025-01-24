@@ -1,0 +1,68 @@
+@ppedv.RentABrain.UI.WebApi_HostAddress = http://localhost:5237
+
+###
+# Create a new customer
+POST {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/customers HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New Customer",
+  "email": "newcustomer@example.com"
+}
+
+###
+# Get a customer by ID
+GET {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/customers/1 HTTP/1.1
+
+###
+# Update an existing customer
+PUT {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/customers/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Updated Customer",
+  "email": "updatedcustomer@example.com"
+}
+
+###
+# Delete a customer by ID
+DELETE {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/customers/1 HTTP/1.1
+
+###
+# Get all customers
+GET {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/customers HTTP/1.1
+
+
+###
+# Create a new product
+POST {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "timeSpan": "01:00:00",
+  "costPerHour": 1000
+}
+
+###
+# Get a product by ID
+GET {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/products/1 HTTP/1.1
+
+###
+# Update an existing product
+PUT {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/products/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Updated Product",
+  "timeSpan": "02:00:00",
+  "costPerHour": 1500
+}
+
+###
+# Delete a product by ID
+DELETE {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/products/1 HTTP/1.1
+
+###
+# Get all products
+GET {{ppedv.RentABrain.UI.WebApi_HostAddress}}/api/products HTTP/1.1

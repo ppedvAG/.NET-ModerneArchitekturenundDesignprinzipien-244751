@@ -39,4 +39,4 @@ Wir verkaufen Rechenzeit an Kunden, die besonders hohe Ansprüche für mathematisc
 - UI Layer
 	- Web MVC
 	- Web API
-	- CLI (Command Line Interface)
+	- CLI (Command Line Interface) als Konsolenanwendung um DB zu erzeugen, aktualisieren, migrieren etc. pp. [nicht implementiert]

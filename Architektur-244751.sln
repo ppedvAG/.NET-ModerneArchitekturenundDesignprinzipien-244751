@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.Logic.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.UI.WebMvc", "ppedv.RentABrain.UI.WebMvc\ppedv.RentABrain.UI.WebMvc.csproj", "{BE784A19-59EC-4FE4-BB89-50C18F7BB9F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ppedv.RentABrain.UI.WebApi", "ppedv.RentABrain.UI.WebApi\ppedv.RentABrain.UI.WebApi.csproj", "{64E806FF-D324-4E2E-A7FE-6D29731ADE60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{BE784A19-59EC-4FE4-BB89-50C18F7BB9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE784A19-59EC-4FE4-BB89-50C18F7BB9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE784A19-59EC-4FE4-BB89-50C18F7BB9F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64E806FF-D324-4E2E-A7FE-6D29731ADE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E806FF-D324-4E2E-A7FE-6D29731ADE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E806FF-D324-4E2E-A7FE-6D29731ADE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E806FF-D324-4E2E-A7FE-6D29731ADE60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,6 @@ Global
 		{D185A477-671A-4C9F-AE59-CE8922A77501} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 		{7F2199CE-8781-44E2-B6CA-EBEBEDEB159B} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 		{BE784A19-59EC-4FE4-BB89-50C18F7BB9F8} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
+		{64E806FF-D324-4E2E-A7FE-6D29731ADE60} = {A543DF50-DF4A-4182-8C14-0852C5E36526}
 	EndGlobalSection
 EndGlobal
