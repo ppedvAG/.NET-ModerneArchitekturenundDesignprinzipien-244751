@@ -7,28 +7,11 @@ namespace ppedv.RentABrain.DataAccess.Data
     {
         public const string ConnectionString = "Server=(localdb)\\SWArch250123;Database=RentABrain;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-        public const string Customer1Id = "123e4567-e89b-12d3-a456-426614174001";
-        public const string Customer2Id = "123e4567-e89b-12d3-a456-426614174002";
-        public const string Customer3Id = "123e4567-e89b-12d3-a456-426614174003";
-
-        public const string Product1Id = "123e4567-e89b-12d3-a456-426614174004";
-        public const string Product2Id = "123e4567-e89b-12d3-a456-426614174005";
-        public const string Product3Id = "123e4567-e89b-12d3-a456-426614174006";
-
-        public const string Brain1Id = "123e4567-e89b-12d3-a456-426614174007";
-        public const string Brain2Id = "123e4567-e89b-12d3-a456-426614174008";
-        public const string Brain3Id = "123e4567-e89b-12d3-a456-426614174009";
-        public const string Brain4Id = "123e4567-e89b-12d3-a456-426614174010";
-        public const string Brain5Id = "123e4567-e89b-12d3-a456-426614174011";
-        public const string Brain6Id = "123e4567-e89b-12d3-a456-426614174012";
-        public const string Brain7Id = "123e4567-e89b-12d3-a456-426614174013";
-        public const string Brain8Id = "123e4567-e89b-12d3-a456-426614174014";
-        public const string Brain9Id = "123e4567-e89b-12d3-a456-426614174015";
-        public const string Brain10Id = "123e4567-e89b-12d3-a456-426614174016";
-
-        public const string Order1Id = "123e4567-e89b-12d3-a456-426614174017";
-        public const string Order2Id = "123e4567-e89b-12d3-a456-426614174018";
-        public const string Order3Id = "123e4567-e89b-12d3-a456-426614174019";
+        public const int Product3Id = 3;
+        public const string Product3Name = "Swing-By Manöver";
+        public const decimal Product3CostPerHour = 2000m;
+        public const decimal Product3TotalCost = 6000m;
+        public static readonly TimeSpan Product3Timespan = new TimeSpan(3, 0, 0);
 
         public static void SeedData(ModelBuilder modelBuilder)
         {
@@ -43,7 +26,7 @@ namespace ppedv.RentABrain.DataAccess.Data
             modelBuilder.Entity<Product>().HasData(
                 new Product { Id = 1, Name = "Quantum Computing", TimeSpan = new TimeSpan(1, 0, 0), CostPerHour = 1000m },
                 new Product { Id = 2, Name = "AI Optimization", TimeSpan = new TimeSpan(2, 0, 0), CostPerHour = 1500m },
-                new Product { Id = 3, Name = "Swing-By Manöver", TimeSpan = new TimeSpan(3, 0, 0), CostPerHour = 2000m }
+                new Product { Id = Product3Id, Name = Product3Name, TimeSpan = Product3Timespan, CostPerHour = Product3CostPerHour }
             );
 
             // Seed Brains

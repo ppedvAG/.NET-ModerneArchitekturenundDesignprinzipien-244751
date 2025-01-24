@@ -32,3 +32,7 @@ Wir verkaufen Rechenzeit an Kunden, die besonders hohe Ansprüche für mathematisc
 		dotnet ef database update --project <BusinessLogic>
 	```
 	- UnitTests gegen localdb
+- generisches Repository Pattern fuer lose Kopplung implementiert
+- Logic Layer 
+	- ProductService implementiert
+	- Tests gegen ProductService jeweils mit Mocks und gegen localdb
