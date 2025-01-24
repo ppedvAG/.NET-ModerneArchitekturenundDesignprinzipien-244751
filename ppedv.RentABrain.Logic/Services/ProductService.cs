@@ -21,8 +21,9 @@ namespace ppedv.RentABrain.Logic.Services
             // Query gibt die Query zurueck und EFCore kann sie zu einem SQL Statement umwandeln, d. h.
             // es wird nur ein Bruchteil der Datensaetze geholt.
 
-            // Allerdings kann es je nach Komplexitaet des Ausdrucks sein, dass das Query nicht als SQL Statement umgewandelt werden kann
-            return repository.GetAll()
+            return repository.Query()
+                // Allerdings kann es je nach Komplexitaet des Ausdrucks sein, dass das Query nicht als SQL Statement umgewandelt werden kann
+                .ToArray()
                 .Select(e => new
                 {
                     Product = e,
@@ -35,7 +36,7 @@ namespace ppedv.RentABrain.Logic.Services
 
         public decimal GetTotalCost(int productId)
         {
-            var product = repository.GetById(productId);
+            var product = repository.GetById(productId).Result;
             if (product == null)
             {
                 return 0;

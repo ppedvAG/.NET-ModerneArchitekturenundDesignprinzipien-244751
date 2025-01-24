@@ -4,14 +4,14 @@ namespace ppedv.RentABrain.Model.Contracts
 {
     public interface IRepository<T> where T : Entity
     {
-        T? GetById(int id);
-        IEnumerable<T> GetAll();
+        Task<T?> GetById(int id);
+        Task<IEnumerable<T>> GetAll();
         IQueryable<T> Query();
 
-        void Add(T item);
-        void Update(T item);
-        void Delete(T item);
+        Task Add(T item);
+        Task<bool> Update(T item);
+        Task<bool> Delete(int id);
 
-        int SaveChanges();
+        Task<int> SaveChanges();
     }
 }

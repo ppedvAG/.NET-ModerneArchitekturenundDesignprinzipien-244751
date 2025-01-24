@@ -2,24 +2,24 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ppedv.RentABrain.Model;
+using ppedv.RentABrain.Model.Contracts;
 using ppedv.RentABrain.Model.Domain;
 
 namespace ppedv.RentABrain.UI.WebMvc.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly RentABrainContext _context;
+        private readonly IRepository<Order> _repo;
 
-        public OrdersController(RentABrainContext context)
+        public OrdersController(IRepository<Order> repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var rentABrainContext = _context.Orders.Include(o => o.Customer).Include(o => o.Product);
-            return View(await rentABrainContext.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Orders/Details/5
@@ -30,23 +30,18 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Customer)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            return View(product);
         }
 
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email");
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
             return View();
         }
 
@@ -55,17 +50,14 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CustomerId,OrderDate,Quantity,ProductId,Id,CreatedDate,ChangedDate")] Order order)
+        public async Task<IActionResult> Create([Bind("TimeSpan,CostPerHour,Name,Id,CreatedDate,ChangedDate")] Order product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
+                await _repo.Add(product);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email", order.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", order.ProductId);
-            return View(order);
+            return View(product);
         }
 
         // GET: Orders/Edit/5
@@ -76,14 +68,12 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email", order.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", order.ProductId);
-            return View(order);
+            return View(product);
         }
 
         // POST: Orders/Edit/5
@@ -91,36 +81,23 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,OrderDate,Quantity,ProductId,Id,CreatedDate,ChangedDate")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("TimeSpan,CostPerHour,Name,Id,CreatedDate,ChangedDate")] Order product)
         {
-            if (id != order.Id)
+            if (id != product.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                var success = await _repo.Update(product);
+                if (!success)
                 {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email", order.CustomerId);
-            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", order.ProductId);
-            return View(order);
+            return View(product);
         }
 
         // GET: Orders/Delete/5
@@ -131,16 +108,13 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.Customer)
-                .Include(o => o.Product)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(order);
+            return View(product);
         }
 
         // POST: Orders/Delete/5
@@ -148,19 +122,8 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            if (order != null)
-            {
-                _context.Orders.Remove(order);
-            }
-
-            await _context.SaveChangesAsync();
+            await _repo.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

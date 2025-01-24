@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ppedv.RentABrain.Model;
+using ppedv.RentABrain.Model.Contracts;
 using ppedv.RentABrain.Model.Domain;
 
 namespace ppedv.RentABrain.UI.WebMvc.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly RentABrainContext _context;
+        private readonly IRepository<Product> _repo;
 
-        public ProductsController(RentABrainContext context)
+        public ProductsController(IRepository<Product> repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Products/Details/5
@@ -28,8 +29,7 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _repo.GetById(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -53,8 +53,7 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _repo.Add(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
@@ -68,7 +67,7 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = await _repo.GetById(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -90,23 +89,12 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var success = await _repo.Update(product);
+                if (!success)
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
             }
             return View(product);
         }
@@ -119,8 +107,7 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _repo.GetById(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -134,19 +121,8 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-            }
-
-            await _context.SaveChangesAsync();
+            await _repo.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

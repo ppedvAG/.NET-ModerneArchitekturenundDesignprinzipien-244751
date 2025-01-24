@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ppedv.RentABrain.Model;
+using ppedv.RentABrain.Model.Contracts;
 using ppedv.RentABrain.Model.Domain;
 
 namespace ppedv.RentABrain.UI.WebMvc.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly RentABrainContext _context;
+        private readonly IRepository<Customer> _repo;
 
-        public CustomersController(RentABrainContext context)
+        public CustomersController(IRepository<Customer> repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Customers/Details/5
@@ -28,14 +27,13 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(product);
         }
 
         // GET: Customers/Create
@@ -49,15 +47,14 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Email,Id,CreatedDate,ChangedDate")] Customer customer)
+        public async Task<IActionResult> Create([Bind("TimeSpan,CostPerHour,Name,Id,CreatedDate,ChangedDate")] Customer product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
+                await _repo.Add(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(product);
         }
 
         // GET: Customers/Edit/5
@@ -68,12 +65,12 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
-            return View(customer);
+            return View(product);
         }
 
         // POST: Customers/Edit/5
@@ -81,34 +78,23 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Email,Id,CreatedDate,ChangedDate")] Customer customer)
+        public async Task<IActionResult> Edit(int id, [Bind("TimeSpan,CostPerHour,Name,Id,CreatedDate,ChangedDate")] Customer product)
         {
-            if (id != customer.Id)
+            if (id != product.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                var success = await _repo.Update(product);
+                if (!success)
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(customer);
+            return View(product);
         }
 
         // GET: Customers/Delete/5
@@ -119,14 +105,13 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var product = await _repo.GetById(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(customer);
+            return View(product);
         }
 
         // POST: Customers/Delete/5
@@ -134,19 +119,8 @@ namespace ppedv.RentABrain.UI.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer != null)
-            {
-                _context.Customers.Remove(customer);
-            }
-
-            await _context.SaveChangesAsync();
+            await _repo.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CustomerExists(int id)
-        {
-            return _context.Customers.Any(e => e.Id == id);
         }
     }
 }

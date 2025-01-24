@@ -20,9 +20,9 @@ namespace ppedv.RentABrain.Model
             _context = new RentABrainContext(options);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return _context.Set<T>().ToArray();
+            return await _context.Set<T>().ToArrayAsync();
         }
 
         public IQueryable<T> Query()
@@ -30,29 +30,51 @@ namespace ppedv.RentABrain.Model
             return _context.Set<T>();
         }
 
-        public T? GetById(int id)
+        public async Task<T?> GetById(int id)
         {
-            return _context.Set<T>().Find(id);
+            return await _context.Set<T>().FindAsync(id);
         }
 
-        public void Add(T item)
+        public async Task Add(T item)
         {
             _context.Set<T>().Add(item);
+            await SaveChanges();
         }
 
-        public void Delete(T item)
+        public async Task<bool> Delete(int id)
         {
+            var item = await GetById(id);
+            if (item == null) 
+                return false;
+
             _context.Set<T>().Remove(item);
+            await SaveChanges();
+            return true;
         }
 
-        public int SaveChanges()
+        public async Task<bool> Update(T item)
         {
-            return _context.SaveChanges();
+            try
+            {
+                _context.Set<T>().Update(item);
+
+                await SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return !ItemExists(item.Id);
+            }
+            return true;
         }
 
-        public void Update(T item)
+        public Task<int> SaveChanges()
         {
-            _context.Set<T>().Update(item);
+            return _context.SaveChangesAsync();
+        }
+
+        private bool ItemExists(int id)
+        {
+            return _context.Set<T>().Any(e => e.Id == id);
         }
     }
 

@@ -27,7 +27,7 @@ namespace ppedv.RentABrain.UI.WebMvc
             ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
 
             // Wir wollen lose Kopplung weswegen wir unsere Controller gegen die Repositories implementieren statt direkt gegen den DbContext
-            builder.Services.AddDbContext<RentABrainContext>(options => options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<RentABrainContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddTransient<IRepository<Brain>>(p => new RentABrainRepositoryAdapter<Brain>(connectionString));
             builder.Services.AddTransient<IRepository<Customer>>(p => new RentABrainRepositoryAdapter<Customer>(connectionString));
