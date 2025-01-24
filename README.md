@@ -36,3 +36,7 @@ Wir verkaufen Rechenzeit an Kunden, die besonders hohe Ansprüche für mathematisc
 - Logic Layer 
 	- ProductService implementiert
 	- Tests gegen ProductService jeweils mit Mocks und gegen localdb
+- UI Layer
+	- Web MVC
+	- Web API
+	- CLI (Command Line Interface)

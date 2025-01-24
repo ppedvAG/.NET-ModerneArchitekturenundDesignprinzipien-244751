@@ -3,7 +3,7 @@ using ppedv.RentABrain.Model.Domain;
 
 namespace ppedv.RentABrain.Logic.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly IRepository<Product> repository;
 
