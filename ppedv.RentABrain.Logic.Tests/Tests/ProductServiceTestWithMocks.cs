@@ -39,7 +39,7 @@ namespace ppedv.RentABrain.Logic.Tests.Tests
             var product = new Product { Id = 1, Name = "Product 1", TimeSpan = new TimeSpan(1, 0, 0), CostPerHour = 1000m };
 
             var mockRepository = new Mock<IRepository<Product>>();
-            mockRepository.Setup(repo => repo.GetById(1)).Returns(product);
+            mockRepository.Setup(repo => repo.GetById(1)).ReturnsAsync(product);
 
             var productService = new ProductService(mockRepository.Object);
 
@@ -55,7 +55,7 @@ namespace ppedv.RentABrain.Logic.Tests.Tests
         {
             // Arrange
             var mockRepository = new Mock<IRepository<Product>>();
-            mockRepository.Setup(repo => repo.GetById(1)).Returns((Product)null);
+            mockRepository.Setup(repo => repo.GetById(1)).ReturnsAsync((Product)null);
 
             var productService = new ProductService(mockRepository.Object);
 
